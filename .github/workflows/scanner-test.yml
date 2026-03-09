@@ -22,7 +22,16 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Run scanner demo
-        run: python3 scanner/scan.py --demo || true
+        run: |
+          # Scanner exits 1 when threats found (expected for demo)
+          python3 scanner/scan.py --demo && exit 1 || true
 
       - name: Run scanner demo (JSON output)
-        run: python3 scanner/scan.py --demo --json
+        run: |
+          # Verify JSON output parses correctly and contains expected results
+          output=$(python3 scanner/scan.py --demo --json 2>&1 || true)
+          echo "$output"
+          echo "$output" | python3 -c "import sys,json; d=json.load(sys.stdin); assert d['skills_scanned']==3; assert d['summary']['fail']==1; assert d['summary']['warn']==1; assert d['summary']['pass']==1"
+
+      - name: Run scanner version
+        run: python3 scanner/scan.py --version
