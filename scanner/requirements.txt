@@ -1,0 +1,5 @@
+# No external dependencies required!
+# awesome-openclaw-security scanner uses only Python standard library.
+# Python 3.8+ required.
+#
+# Modules used: argparse, hashlib, json, os, re, sys, datetime, pathlib

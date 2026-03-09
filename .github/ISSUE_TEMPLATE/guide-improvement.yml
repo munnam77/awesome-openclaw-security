@@ -1,0 +1,25 @@
+name: Guide Improvement
+description: Suggest an improvement to an existing guide or request a new one
+title: "[GUIDE] "
+labels: ["documentation"]
+body:
+  - type: dropdown
+    id: guide
+    attributes:
+      label: Which guide?
+      options:
+        - Gateway Hardening
+        - Skill Vetting
+        - Docker Secure Deploy
+        - Network Isolation
+        - Credential Management
+        - Security Checklist
+        - New guide request
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: What should be improved or added?
+    validations:
+      required: true

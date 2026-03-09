@@ -1,0 +1,212 @@
+{
+  "version": "2026.03.09",
+  "last_updated": "2026-03-09",
+  "total_patterns": 15,
+  "source": "awesome-openclaw-security community + public threat intelligence",
+  "patterns": [
+    {
+      "id": "AMOS-001",
+      "name": "Atomic macOS Stealer Loader",
+      "severity": "critical",
+      "indicators": [
+        "curl.*AMOS",
+        "osascript.*-e.*password",
+        "osascript.*display\\s+dialog.*password"
+      ],
+      "description": "Downloads and executes Atomic macOS Stealer (AMOS). Harvests passwords, browser cookies, crypto wallets, and keychain data.",
+      "first_seen": "2026-01-15",
+      "claw_hub_ids": ["weather-helper-pro", "system-optimizer-v2"]
+    },
+    {
+      "id": "RSHELL-001",
+      "name": "Python Reverse Shell",
+      "severity": "critical",
+      "indicators": [
+        "socket\\.socket.*SOCK_STREAM.*\\.connect\\(",
+        "subprocess\\.call.*\\/bin\\/sh",
+        "pty\\.spawn.*\\/bin\\/bash"
+      ],
+      "description": "Opens a reverse TCP shell to an attacker-controlled server, providing full command execution on the host.",
+      "first_seen": "2026-01-22",
+      "claw_hub_ids": ["network-diagnostics", "ssh-manager-lite"]
+    },
+    {
+      "id": "RSHELL-002",
+      "name": "Node.js Reverse Shell",
+      "severity": "critical",
+      "indicators": [
+        "net\\.Socket\\(\\).*\\.connect\\(",
+        "child_process.*\\.exec\\(.*\\/bin\\/sh",
+        "spawn\\(['\"](?:\\/bin\\/sh|\\/bin\\/bash|cmd\\.exe)['\"]"
+      ],
+      "description": "Node.js-based reverse shell using net.Socket and child_process to establish backdoor access.",
+      "first_seen": "2026-01-28",
+      "claw_hub_ids": ["quick-terminal", "dev-tools-helper"]
+    },
+    {
+      "id": "CRED-001",
+      "name": "SSH Key Harvester",
+      "severity": "critical",
+      "indicators": [
+        "readFile.*\\.ssh\\/id_rsa",
+        "readFile.*\\.ssh\\/id_ed25519",
+        "open\\(.*\\.ssh\\/",
+        "\\.ssh\\/known_hosts"
+      ],
+      "description": "Reads SSH private keys and known_hosts for lateral movement and unauthorized server access.",
+      "first_seen": "2026-02-03",
+      "claw_hub_ids": ["git-helper-plus", "deploy-assistant"]
+    },
+    {
+      "id": "CRED-002",
+      "name": "AWS Credential Theft",
+      "severity": "critical",
+      "indicators": [
+        "\\.aws\\/credentials",
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY",
+        "readFile.*\\.aws\\/"
+      ],
+      "description": "Harvests AWS credentials from config files and environment variables for cloud account takeover.",
+      "first_seen": "2026-02-05",
+      "claw_hub_ids": ["cloud-deploy-skill", "aws-helper-unofficial"]
+    },
+    {
+      "id": "CRED-003",
+      "name": "Browser Cookie Stealer",
+      "severity": "critical",
+      "indicators": [
+        "Cookies\\/Cookies\\.binarycookies",
+        "google-chrome.*Cookies",
+        "firefox.*cookies\\.sqlite",
+        "Login\\s+Data.*Chrome"
+      ],
+      "description": "Steals browser cookies and saved passwords from Chrome, Firefox, and Safari for session hijacking.",
+      "first_seen": "2026-02-08",
+      "claw_hub_ids": ["browser-sync-skill", "password-manager-lite"]
+    },
+    {
+      "id": "MINER-001",
+      "name": "XMRig Crypto Miner Dropper",
+      "severity": "critical",
+      "indicators": [
+        "xmrig",
+        "stratum\\+tcp:\\/\\/",
+        "pool\\.minexmr\\.com",
+        "moneroocean\\.stream",
+        "randomx.*--threads"
+      ],
+      "description": "Downloads and runs XMRig cryptocurrency miner, consuming CPU resources to mine Monero.",
+      "first_seen": "2026-02-10",
+      "claw_hub_ids": ["performance-booster", "system-cleaner-pro"]
+    },
+    {
+      "id": "EXFIL-001",
+      "name": "Base64 Data Exfiltrator",
+      "severity": "critical",
+      "indicators": [
+        "b64encode.*requests\\.post",
+        "btoa.*fetch.*POST",
+        "Buffer\\.from.*base64.*https?:\\/\\/"
+      ],
+      "description": "Encodes sensitive files in base64 and exfiltrates them to an external server via HTTP POST.",
+      "first_seen": "2026-02-12",
+      "claw_hub_ids": ["file-sync-cloud", "backup-assistant"]
+    },
+    {
+      "id": "EXFIL-002",
+      "name": "DNS Tunnel Exfiltration",
+      "severity": "critical",
+      "indicators": [
+        "dns\\.resolver.*TXT",
+        "subprocess.*nslookup",
+        "subprocess.*dig.*\\+short",
+        "socket\\.getaddrinfo.*encoded"
+      ],
+      "description": "Exfiltrates data through DNS queries by encoding stolen data in subdomain labels or TXT record lookups.",
+      "first_seen": "2026-02-18",
+      "claw_hub_ids": ["dns-lookup-skill", "network-checker"]
+    },
+    {
+      "id": "KEYLOG-001",
+      "name": "Python Keylogger",
+      "severity": "critical",
+      "indicators": [
+        "pynput\\.keyboard",
+        "keyboard\\.on_press",
+        "Listener.*on_press.*on_release",
+        "CGEventTapCreate.*kCGEventKeyDown"
+      ],
+      "description": "Captures keystrokes using OS-level keyboard hooks and stores or transmits them.",
+      "first_seen": "2026-02-20",
+      "claw_hub_ids": ["typing-analytics", "productivity-tracker-v3"]
+    },
+    {
+      "id": "RANSOM-001",
+      "name": "File Encryption Ransomware",
+      "severity": "critical",
+      "indicators": [
+        "Fernet\\.generate_key.*encrypt.*\\.walk",
+        "AES\\.new.*MODE_CBC.*os\\.walk",
+        "crypto.*encrypt.*glob.*\\*\\*\\/\\*"
+      ],
+      "description": "Encrypts user files with a generated key and demands ransom for decryption.",
+      "first_seen": "2026-02-22",
+      "claw_hub_ids": ["file-organizer-pro"]
+    },
+    {
+      "id": "PERSIST-001",
+      "name": "Crontab/LaunchAgent Persistence",
+      "severity": "critical",
+      "indicators": [
+        "crontab.*-l.*crontab.*-",
+        "LaunchAgents.*\\.plist",
+        "launchctl.*load",
+        "schtasks.*\\/create"
+      ],
+      "description": "Establishes persistence by adding entries to crontab (Linux) or LaunchAgents (macOS) to survive reboots.",
+      "first_seen": "2026-02-25",
+      "claw_hub_ids": ["auto-start-skill", "task-scheduler-helper"]
+    },
+    {
+      "id": "SUPPLY-001",
+      "name": "ClawHub Typosquat Package",
+      "severity": "high",
+      "indicators": [
+        "clawinstall.*--force",
+        "claw-hub\\.io.*unofficial",
+        "registry\\.claw-skills\\.net"
+      ],
+      "description": "References a typosquatted or unofficial ClawHub registry to trick users into installing compromised skills.",
+      "first_seen": "2026-03-01",
+      "claw_hub_ids": ["various-typosquats"]
+    },
+    {
+      "id": "PRIV-001",
+      "name": "Privilege Escalation via SUID",
+      "severity": "critical",
+      "indicators": [
+        "chmod.*\\+s\\s",
+        "chmod.*4755",
+        "chmod.*u\\+s",
+        "find.*-perm.*4000"
+      ],
+      "description": "Attempts to set SUID bit on binaries for privilege escalation to root.",
+      "first_seen": "2026-03-03",
+      "claw_hub_ids": ["file-permission-fixer"]
+    },
+    {
+      "id": "CLIP-001",
+      "name": "Clipboard Crypto Address Swapper",
+      "severity": "critical",
+      "indicators": [
+        "clipboard.*(?:bc1|0x[0-9a-fA-F]{40}|[13][a-km-zA-HJ-NP-Z1-9]{25,34})",
+        "pyperclip.*replace.*(?:bitcoin|ethereum|wallet)",
+        "pbcopy.*\\$\\(.*address"
+      ],
+      "description": "Monitors clipboard for cryptocurrency addresses and replaces them with attacker-controlled addresses.",
+      "first_seen": "2026-03-05",
+      "claw_hub_ids": ["crypto-portfolio-tracker", "clipboard-manager-pro"]
+    }
+  ]
+}
